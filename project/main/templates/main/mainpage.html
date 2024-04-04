@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <div>
+    <img src="{% static 'images/logo.png' %}" alt="logo" width="100px">
+    <h1 class="contents"> What is Djanggo</h1>
+    <div class="contents">Welcome to my study zone!</div>
+    <div>※ About MTV
+      <ul>
+        <li>Model : {{info.model}}</li>
+        <li>Template : {{info.template}}</li>
+        <li>View : {{info.view}}</li>
+      </ul>
+    </div>
+    <div>※ MTV Advantage
+      <ul>
+        <li>Modules independence</li>
+        <li>Easy to collaborate</li>
+        <li>High dependency</li>
+      </ul>
+    </div>
+    <div>※ Template Language
+      <ul>
+      {% for member in members %}
+        <li>{{member}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}
