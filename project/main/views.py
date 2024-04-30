@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
+
+from .models import Post
 
 # Create your views here.
 
@@ -10,7 +13,54 @@ def mainpage(request):
     return render(request, 'main/mainpage.html', context)
 
 def secondpage(request):
-    context = {
-        'members' : ['슬램덩크', '주로옥', '햐안집']
-    }
-    return render(request, 'main/secondpage.html', context)
+    posts = Post.objects.all()
+    return render(request, 'main/secondpage.html', {'posts': posts})
+
+
+def new_post(request):
+    return render(request, 'main/new-post.html')
+
+def detail(request, id):
+    post = get_object_or_404(Post, pk = id)
+    return render(request, 'main/detail.html', {'post':post})
+
+def edit(request, id):
+    edit_post = Post.objects.get(pk=id)
+    return render(request, 'main/edit.html', {'post' : edit_post})
+
+def update(request, id):
+    update_post = Post.objects.get(pk=id)
+
+    update_post.title = request.POST.get('title')
+    update_post.writer = request.POST.get('writer')
+    update_post.email = request.POST.get('email')
+    update_post.body = request.POST.get('body')
+    update_post.pub_date = timezone.now()
+    update_post.image = request.FILES.get('image')
+
+    if request.FILES.get('image'):
+        update_post.imgae = request.FILES['image']
+
+    update_post.save()
+
+    return redirect('main:detail', update_post.id) 
+
+def delete(request, id):
+    delete_post = Post.objects.get(pk=id)
+    delete_post.delete()
+    return redirect('main:secondpage')
+
+def create(request):
+    new_post = Post()
+
+    new_post.title = request.POST.get('title')
+    new_post.writer = request.POST.get('writer')
+    new_post.email = request.POST.get('email')
+    new_post.body = request.POST.get('body')
+    new_post.pub_date = timezone.now()
+    new_post.image = request.FILES.get('image')
+
+
+    new_post.save()
+
+    return redirect('main:detail', new_post.id) 

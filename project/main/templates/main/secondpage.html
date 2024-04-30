@@ -7,13 +7,16 @@
     <h1 class="contents">This is Second Page</h1>
     <h2 class="contents">baby lion fighting</h2>
 </div>
-
-<div>★충무로 술집 리스트
-    <ul>
-    {% for member in members %}
-        <li>{{member}}</li>
-        {% endfor %}
-    </ul>
-    <img src="{% static 'images/logoo.png' %}" alt="logo" width="500px"
+<div>
+    {% for post in posts %}
+    <div>
+        <hr/>
+        <h3>{{post.title}}</h3>
+        {{post.writer}} | {{post.pub_date}} | {{post.email}}<br>
+        {{post.summary}}
+        <a href="{% url 'main:detail' post.id %}">자세히 보기</a>
+        <br>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
