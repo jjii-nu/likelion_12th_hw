@@ -39,7 +39,7 @@ def update(request, id):
     update_post.image = request.FILES.get('image')
 
     if request.FILES.get('image'):
-        update_post.imgae = request.FILES['image']
+        update_post.image = request.FILES['image']
 
     update_post.save()
 
