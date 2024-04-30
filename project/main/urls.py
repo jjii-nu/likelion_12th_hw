@@ -1,14 +1,14 @@
 from django.urls import path
-from main import views
+from .views import *
 
 app_name = "main"
 urlpatterns = [
-    path('', views.mainpage, name="mainpage"),
-    path('second', views.secondpage, name="secondpage"),
-    path('new-post', views.new_post, name="new-post"),
-    path('create', views.create, name="create"),
-    path('<int:id>', views.detail, name="detail"),
-    path('edit/<int:id>', views.edit, name="edit"),
-    path('update/<int:id>', views.update, name="update"),    
-    path('delete/<int:id>', views.delete, name="delete"),
+    path('', mainpage, name="mainpage"),
+    path('second', secondpage, name="secondpage"),
+    path('new-post', new_post, name="new-post"),
+    path('create', create, name="create"),
+    path('<int:id>', detail, name="detail"),
+    path('edit/<int:id>', edit, name="edit"),
+    path('update/<int:id>', update, name="update"),    
+    path('delete/<int:id>', delete, name="delete"),
 ]

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h2>수정중...</h2>
+<h2>수정중입니다..</h2>
 <form action="{% url 'main:update' post.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <p>제목 : <input type="text" name="title" value="{{post.title}}"></p>
