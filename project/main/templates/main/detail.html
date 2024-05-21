@@ -35,8 +35,8 @@
         <h4>작성자 : {{comment.writer}}</h4> 
         <p>내용 : {{comment.content}}</p> 
         <p>{{comment.pub_date}}</p> 
-        {% if post.writer == user %}
-        <a href="{% url 'main:delete2' comment.id %}">삭제하기</a>
+        {% if comment.writer == user %}
+        <t></T><a href="{% url 'main:delete2' comment.id %}">삭제하기</a></t>
         {% endif %}
         {% endfor %} 
     </div> 

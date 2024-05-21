@@ -30,5 +30,5 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, null=False, blank=False, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.post.title + ":" + self.content[:20] + "by" + self.writer.profile.nickname
+        return self.post.title + ":" + self.content[:20] + "by" + self.writer.username
     
