@@ -61,7 +61,7 @@ def delete(request, id):
     delete_post.delete()
     return redirect('main:secondpage')
 
-def delete2(request, id):
+def deleteComment(request, id):
     delete_comment = Comment.objects.get(pk=id)
     post = Post.objects.get(pk=delete_comment.post.id)
     delete_comment.delete()
