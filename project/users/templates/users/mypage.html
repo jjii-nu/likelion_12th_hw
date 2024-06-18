@@ -5,6 +5,7 @@
 <h1>마이페이지에 오신 것을 환영합니다</h1>
 
 <h2>팔로워</h2>
+{{ user.profile.followers.count}}명
 <ul>
     {% for follower in user.profile.followers.all %}
     <li><a href="{% url 'users:mypage' follower.user.id %}">{{ follower.user.username }}</a></li>
@@ -14,6 +15,7 @@
 </ul>
 
 <h2>팔로잉</h2>
+{{ user.profile.followings.count}}명
 <ul>
     {% for following in user.profile.followings.all %}
     <li><a href="{% url 'users:mypage' following.user.id %}">{{ following.user.username }}</a></li> 
