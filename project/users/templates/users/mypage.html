@@ -4,20 +4,33 @@
 {% block content %}
 <h1>마이페이지에 오신 것을 환영합니다</h1>
 
-<h3>{{ user.profile.phonenumber}}여기로 합격문자 드리겠습니다</h3>
-<h3>{{ user.profile.email}}여기로 이메일 전송도 하겠습니다</h3>
-<h3>{{ user.profile.schoolname}}에 재학중</h3>
-
-<div>
-    {% for post in posts %}
-    <div>
-        <hr/>
-        <h3>{{post.title}}</h3>
-        {{post.writer}} | {{post.pub_date}} | {{post.email}}<br>
-        {{post.summary}}
-        <a href="{% url 'main:detail' post.id %}">자세히 보기</a>
-        <br>
-    </div>
+<h2>팔로워</h2>
+<ul>
+    {% for follower in user.profile.followers.all %}
+    <li><a href="{% url 'users:mypage' follower.user.id %}">{{ follower.user.username }}</a></li>
+    {% empty %}
+    <li>없습니다.</li>
     {% endfor %}
-</div>
+</ul>
+
+<h2>팔로잉</h2>
+<ul>
+    {% for following in user.profile.followings.all %}
+    <li><a href="{% url 'users:mypage' following.user.id %}">{{ following.user.username }}</a></li> 
+    {% empty %}
+    <li>없습니다.</li>
+    {% endfor %}
+</ul>
+{% if request.user != user %}
+    {% if request.user.profile in user.profile.followers.all %}
+        <a href="{% url 'users:follow' user.id %}">
+        <button type="button" class="btn btn-outline-info">언팔로우</button>
+        </a>
+    {% else %}
+        <a href="{% url 'users:follow' user.id %}">
+        <button type="button" class="btn btn-info">팔로우</button>
+        </a>
+        {% endif %}
+    {% endif %}
 {% endblock %}
+

@@ -32,13 +32,12 @@ def signup(request):
                 username=request.POST['username'],
                 password=request.POST['password']
             )
-            phonenumber=request.POST['phonenumber']
-            email=request.POST['email']
-            schoolname=request.POST['schoolname']
-
-            profile = Profile(user=user, phonenumber=phonenumber, email=email, schoolname=schoolname)
-            profile.save()
-
+            
+            user.profile.phonenumber=request.POST['phonenumber']
+            user.profile.email=request.POST['email']
+            user.profile.schoolname=request.POST['schoolname']
+            user.profile.save()
+            
             auth.login(request, user)
             return redirect('/')
         
